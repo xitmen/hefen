@@ -1,0 +1,45 @@
+export const cardeList = {
+  "code": 1,
+  "message": "success",
+  "data": [{
+    "id": "1",
+    "name": "交通",
+    "sort": "1"
+  }, {
+    "id": "2",
+    "name": "兴业",
+    "sort": "2"
+  }, {
+    "id": "3",
+    "name": "民生",
+    "sort": "3"
+  }, {
+    "id": "4",
+    "name": "招商",
+    "sort": "4"
+  }, {
+    "id": "5",
+    "name": "浦发",
+    "sort": "5"
+  }, {
+    "id": "6",
+    "name": "广发",
+    "sort": "6"
+  }, {
+    "id": "7",
+    "name": "光大",
+    "sort": "7"
+  }, {
+    "id": "8",
+    "name": "华夏",
+    "sort": "8"
+  }, {
+    "id": "9",
+    "name": "上海",
+    "sort": "9"
+  }, {
+    "id": "10",
+    "name": "广州",
+    "sort": "10"
+  }]
+}

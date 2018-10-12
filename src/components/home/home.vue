@@ -1,0 +1,46 @@
+<template>
+  <div class="home">
+    <ul>
+      <router-link tag="li" to="/card-list">
+        <span>信用卡申请</span>
+      </router-link>
+      <router-link tag="li" to="/points">
+        <span>积分兑换</span>
+      </router-link>
+      <router-link tag="li" to="/bankPoints">
+        <span>银行积分</span>
+      </router-link>
+      <router-link tag="li" to="/visitingCard">
+        <span>名片</span>
+      </router-link>
+      <router-link tag="li" to="/pointsChange">
+        <span>积分兑换</span>
+      </router-link>
+      <router-link tag="li" to="/team">
+        <span>团队</span>
+      </router-link>
+      <router-link tag="li" to="/download">
+        <span>下载</span>
+      </router-link>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Home'
+}
+</script>
+
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  .home
+    display flex
+    justify-content center
+    align-items center
+    ul
+      li
+        margin 35px 0
+        height 35px
+        line-height 25px
+        text-align center
+</style>
