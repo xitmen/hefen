@@ -100,7 +100,7 @@ export default {
           if (data.code === String(SUCCESS)) {
             this.clearParam()
             if (next === true) {
-              this.text = '提交成功！您可以进行下一个订单的操作'
+              this.text = '提交成功！您可以进行下一个订单的操作!'
             } else {
               this.text = '提交成功!'
               this.$refs.tips.show()
