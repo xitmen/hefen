@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <compute ref="compute" :min="minPoints" :goodsName="goodsName"></compute>
+    <compute ref="compute" :min="minPoints" :goodsName="goodsName" :exchangeRate="proportion" :goodsId="id"></compute>
     <router-view></router-view>
   </div>
 </template>
@@ -64,6 +64,8 @@ export default {
       keywords: '',
       goodsName: null,
       minPoints: 1000,
+      proportion: 0,
+      id: '',
       pointsData: []
     }
   },
@@ -112,7 +114,11 @@ export default {
       })
     },
     computeHandler (item) {
-      this.goodsName = item
+      this.goodsName = item.name
+      this.minPoints = Number(item.integral)
+      let price = Number(item.price)
+      this.proportion = this.minPoints / price
+      this.id = item.id
       this.$refs.compute.show()
       this.setPointsType('4')
     },

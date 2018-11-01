@@ -88,11 +88,14 @@ export default {
       this.orderInfo = ''
     },
     submitHandler (next) {
+      if (this.isLoading) {
+        return
+      }
       if (this.orderInfo.trim() === '' && this.imgKeys.length === 0) {
         this.$refs.tips.show()
       } else {
         this.isLoading = true
-        submitOrder({uid: this.uid, title: this.goodsName.title, good_id: this.goodsName.id, type: this.pointsType, order_str: this.orderInfo, images: this.imgKeys.join('#')}).then((data) => {
+        submitOrder({uid: this.uid, title: this.goodsName.name, good_id: this.goodsName.id, type: this.pointsType, order_str: this.orderInfo, images: this.imgKeys.join('#')}).then((data) => {
           this.isLoading = false
           if (data.code === String(SUCCESS)) {
             this.clearParam()

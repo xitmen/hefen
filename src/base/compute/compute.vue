@@ -66,6 +66,10 @@ export default {
     goodsName: {
       type: String,
       default: ''
+    },
+    goodsId: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -96,7 +100,7 @@ export default {
       this.$router.push({
         path: '/exchange'
       })
-      this.setGoodsName(this.goodsName)
+      this.setGoodsName({name: this.goodsName, id: this.goodsId})
     },
     ...mapMutations({
       setGoodsName: 'SET_GOODS_NAME'
@@ -104,8 +108,8 @@ export default {
   },
   watch: {
     points () {
-      if (this.points !== '' && !isNaN(this.points) && this.points > this.min) {
-        let price = Math.max(0, (parseInt(this.points) / this.exchangeRate)) * 100
+      if (this.points !== '' && !isNaN(this.points)) {
+        let price = Math.max(0, (parseInt(this.points) / this.exchangeRate))
         this.price = price.toFixed(2)
       } else {
         this.price = ''

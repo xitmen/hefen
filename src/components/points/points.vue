@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <compute ref="compute" :min="minPoints"></compute>
+    <compute ref="compute" :min="minPoints" :goodsName="goodsName" :exchangeRate="proportion" :goodsId="id"></compute>
     <router-view></router-view>
   </div>
 </template>
@@ -70,6 +70,9 @@ export default {
         code: -3
       }],
       minPoints: 1000,
+      goodsName: '',
+      proportion: 0,
+      id: '',
       currentPoints: 0,
       pointsData: null
     }
@@ -108,16 +111,23 @@ export default {
       })
       this.setBankCode(this.keywords)
     },
-    exchangeHandler () {
+    exchangeHandler (item) {
       this.$router.push({
         path: '/exchange'
       })
+      this.setGoodsName(item)
     },
-    computeHandler () {
+    computeHandler (item) {
+      this.minPoints = Number(item.integral)
+      this.goodsName = item.name
+      let price = Number(item.price)
+      this.proportion = this.minPoints / price
+      this.id = item.id
       this.$refs.compute.show()
     },
     ...mapMutations({
       setPointsType: 'SET_POINTS_TYPE',
+      setGoodsName: 'SET_GOODS_NAME',
       setBankCode: 'SET_BANK_CODE'
     })
   },
