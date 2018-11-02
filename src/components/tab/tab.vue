@@ -77,7 +77,8 @@ export default {
     },
     download (device) {
       if (device === 'IOS' || this.device === 'IOS') {
-        alert('下载IOS版')
+        // alert('下载IOS版')
+        location.href = 'https://itunes.apple.com/cn/app/id1437709892?mt=8'
       } else if (device === 'Android' || this.device === 'Android') {
         location.href = 'https://www.pgyer.com/ccej'
       }
