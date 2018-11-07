@@ -38,6 +38,7 @@
       </div>
       <confirm text="请选同意协议" ref="confirm" @confirm="selectedCheck"></confirm>
       <tips :text="text" ref="tips"></tips>
+      <iframe :src="applyUrl" class="applyUrl" v-show="isIframe"></iframe>
     </div>
   </transition>
 </template>
@@ -48,7 +49,7 @@ import Confirm from 'base/confirm/confirm'
 import {mapGetters} from 'vuex'
 import Tips from 'base/tips/tips'
 import {sendCardAndUserInfo} from 'base/api/api'
-import {SUCCESS, APPLY_CARD} from 'base/api/config'
+import {SUCCESS} from 'base/api/config'
 import IdValidator from 'id-validator'
 
 const idValidator = new IdValidator()
@@ -60,6 +61,8 @@ export default {
       share: false,
       isChecked: false,
       text: '',
+      applyUrl: '',
+      isIframe: false,
       ajax: {
         uid: '2',
         name: '',
@@ -113,7 +116,8 @@ export default {
       } else {
         sendCardAndUserInfo(data).then((data) => {
           if (data.code === String(SUCCESS)) {
-            location.href = APPLY_CARD
+            this.isIframe = true
+            this.applyUrl = this.cardInfo.apply_url
           }
         })
       }
@@ -139,6 +143,17 @@ export default {
     right 0
     bottom 0
     background-color #fff
+    .applyUrl
+      position fixed
+      z-index 2
+      top 45px
+      width 100vw
+      height 100vh
+      padding-bottom 45px
+      background-color #fff
+      left 0
+      right 0
+      bottom 0
     .apply-card-content
       bg-image('banner.png')
       background-repeat no-repeat

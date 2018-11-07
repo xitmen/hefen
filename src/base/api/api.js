@@ -2,10 +2,10 @@ import {HOST_NAME} from './config'
 import ax from 'axios'
 import qs from 'qs'
 
-export const getCardList = () => {
+export const getCardList = (params) => {
   const url = `${HOST_NAME}api/index/getBankList`
   return new Promise((resolve, reject) => {
-    ax.post(url)
+    ax.post(url, qs.stringify(params))
       .then(function (response) {
         resolve(response.data)
       })
@@ -147,6 +147,34 @@ export const getExchangePointsGuide = (cardId) => {
   return new Promise((resolve, reject) => {
     let ajax = {bank_id: cardId}
     ax.post(url, qs.stringify(ajax))
+      .then(function (response) {
+        resolve(response.data)
+      })
+      .catch(function (error) {
+        reject(error)
+      })
+  })
+}
+
+// sendVerificationCode 发送验证码
+export const sendVerificationCode = (params) => {
+  const url = `${HOST_NAME}api/common/sendVerificationCode`
+  return new Promise((resolve, reject) => {
+    ax.post(url, qs.stringify(params))
+      .then(function (response) {
+        resolve(response.data)
+      })
+      .catch(function (error) {
+        reject(error)
+      })
+  })
+}
+
+// 注册
+export const register = (params) => {
+  const url = `${HOST_NAME}api/common/register`
+  return new Promise((resolve, reject) => {
+    ax.post(url, qs.stringify(params))
       .then(function (response) {
         resolve(response.data)
       })

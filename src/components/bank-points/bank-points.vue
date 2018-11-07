@@ -102,7 +102,7 @@ export default {
       this.setBankCode(this.keywords)
     },
     getCardList () {
-      getCardList().then((data) => {
+      getCardList({type: 2}).then((data) => {
         if (data.code === SUCCESS) {
           data.data.map((item) => {
             item.keywords = this.mapKey[item.name]

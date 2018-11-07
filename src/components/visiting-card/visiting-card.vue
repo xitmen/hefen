@@ -3,7 +3,10 @@
     <div class="visiting-card">
       <tab ref="tab" title="名片" :goAppHome="goAppHome" :bgColor="bgColor" :share="share"></tab>
       <div class="visiting-card-content">
-        <img src="/static/img/img.png" />
+        <div class="code-img">
+          <div id="qrcode"></div>
+          <img src="/static/img/logo.jpg" />
+        </div>
         <span><em>邀请码:</em>{{code}}</span>
       </div>
       <p class="share-btn">
@@ -16,7 +19,7 @@
 <script>
 import {getCusinessCard} from 'base/api/api'
 import Tab from 'components/tab/tab'
-import {SUCCESS} from 'base/api/config'
+import {SUCCESS, SIGN_IN} from 'base/api/config'
 export default {
   name: 'apply-card',
   data () {
@@ -38,7 +41,7 @@ export default {
       }
     } catch (e) {
       this.isApp = false
-      this.text = '立即下载'
+      this.text = '立即加入'
     }
   },
   beforeMount () {
@@ -58,16 +61,27 @@ export default {
       getCusinessCard({uid: this.uid}).then((data) => {
         if (data.code === SUCCESS && data.data) {
           this.code = data.data.code
+          this.setCodeImg()
         } else {
           alert('UID错误')
         }
       })
     },
+    setCodeImg() {
+      let qrcode = new QRCode(document.getElementById('qrcode'), {
+        width: 200,
+        height: 200
+      })
+      qrcode.makeCode(`${SIGN_IN}signIn?upCode=${this.code}`)
+    },
     shareHandler () {
       if (this.isApp) {
         this.$refs.tab.shareHandler(true)
       } else {
-        this.$refs.tab.download()
+        // this.$refs.tab.download()
+        this.$router.push({
+          path: `/signIn?upCode=${this.code}`
+        })
       }
     }
   },
@@ -106,10 +120,18 @@ export default {
       flex-direction column
       align-items center
       box-shadow 0 0 10px #ccc
-      img
-        width (400/2)px
-        height (400/2)px
-        margin-bottom 15px
+      .code-img
+        position absolute
+        width 200px
+        height 200px
+        img
+          position absolute
+          top 50%
+          left 50%
+          transform translate(-50%, -50%)
+          width 60px
+          height 60px
+          margin-bottom 15px
       span
         position absolute
         width 100%

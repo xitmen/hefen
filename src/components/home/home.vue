@@ -22,6 +22,9 @@
       <router-link tag="li" to="/download">
         <span>下载</span>
       </router-link>
+      <router-link tag="li" to="/signIn">
+        <span>注册</span>
+      </router-link>
     </ul>
   </div>
 </template>

@@ -52,6 +52,7 @@ export default {
       cardList: [],
       currentCard: 0,
       cardId: null,
+      applyUrl: '',
       cardListData: null
     }
   },
@@ -63,12 +64,14 @@ export default {
     selectCard (index, cardId) {
       this.currentCard = index
       this.cardId = cardId
+      this.applyUrl = this.cardList[cardId].apply_url
     },
     getCardList () {
-      getCardList().then((data) => {
+      getCardList({type: 1}).then((data) => {
         if (data.code === SUCCESS) {
           this.cardList = data.data
           this.cardId = this.cardList[0].id
+          this.applyUrl = this.cardList[0].apply_url
         }
       })
     },
@@ -76,6 +79,7 @@ export default {
       this.$router.push({
         path: `/card-list/${item.bank_id}`
       })
+      item.apply_url = this.applyUrl
       this.setCardInfo(item)
     },
     ...mapMutations({

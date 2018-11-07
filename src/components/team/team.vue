@@ -3,7 +3,10 @@
     <div class="team">
       <tab ref="tab" title="名片" :goAppHome="goAppHome" :bgColor="bgColor" :share="share"></tab>
       <div class="team-content">
-        <img src="/static/img/img.png" />
+        <div class="code-img">
+          <div id="qrcode"></div>
+          <img src="/static/img/logo.jpg" />
+        </div>
         <p class="team-code">{{code}}</p>
       </div>
       <p class="share-btn">
@@ -16,7 +19,7 @@
 <script>
 import Tab from 'components/tab/tab'
 import {getCusinessCard} from 'base/api/api'
-import {SUCCESS} from 'base/api/config'
+import {SUCCESS, SIGN_IN} from 'base/api/config'
 
 export default {
   name: 'team',
@@ -55,10 +58,18 @@ export default {
     this.getUserImg()
   },
   methods: {
+    setCodeImg() {
+      let qrcode = new QRCode(document.getElementById('qrcode'), {
+        width: 200,
+        height: 200
+      })
+      qrcode.makeCode(`${SIGN_IN}signIn?upCode=${this.code}`)
+    },
     getUserImg () {
       getCusinessCard({uid: this.uid}).then((data) => {
         if (data.code === SUCCESS && data.data) {
           this.code = data.data.code
+          this.setCodeImg()
         } else {
           alert('UID错误')
         }
@@ -103,15 +114,24 @@ export default {
       bg-image('title.png')
       box-sizing border-box
       text-align center
-      img
-        display inline-block
-        margin 25px auto
-        width (400/2)px
-        height (400/2)px
+      .code-img
+        position relative
+        width 200px
+        height 200px
+        margin 25px auto 0 auto
+        img
+          position absolute
+          top 50%
+          left 50%
+          transform translate(-50%, -50%)
+          width 60px
+          height 60px
+          margin-bottom 15px
       .team-code
         width (500/2)px
         height (107/2)px
-        margin-top 23px
+        line-height (107/2)px
+        margin-top 30px
         color #FF6154
         font-size 22px
     .share-btn

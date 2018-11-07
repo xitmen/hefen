@@ -75,6 +75,12 @@ const Download = (resolve) => {
   })
 }
 
+const SignIn = (resolve) => {
+  import('components/sign-in/sign-in').then((module) => {
+    resolve(module)
+  })
+}
+
 export default new Router({
   routes: [
     {
@@ -138,6 +144,11 @@ export default new Router({
       path: '/download',
       name: 'Download',
       component: Download
+    },
+    {
+      path: '/signIn',
+      name: 'SignIn',
+      component: SignIn
     }
   ]
 })
