@@ -1,48 +1,52 @@
 <template>
   <div class="sign-in">
     <h2>注册</h2>
-    <ul>
-      <li>
-        <label>姓名</label>
-        <p>
-          <input type="text" v-model="name" placeholder="请输入姓名" />
-        </p>
-      </li>
-      <li>
-        <label>手机号</label>
-        <p>
-          <input type="tel" v-model="phoneNumber" maxlength="11" placeholder="请输入手机号" />
-        </p>
-      </li>
-      <li>
-        <label>密码</label>
-        <p>
-          <input type="password" v-model="password" maxlength="11" placeholder="请输入密码" />
-        </p>
-      </li>
-      <li>
-        <label>确认密码</label>
-        <p>
-          <input type="password" v-model="confirmPassword" maxlength="11" placeholder="请确认密码" />
-        </p>
-      </li>
-      <li>
-        <label>验证码</label>
-        <p>
-          <input type="text" v-model="phoneCode" placeholder="请输入验证码" />
-          <a href="javascript:;" @click="getPhoneCode">{{btnText}}</a>
-        </p>
-      </li>
-      <li>
-        <label>推荐码</label>
-        <p>
-          <input type="text" v-model="upCode" :disabled="isDisabled" placeholder="请输入推荐码" />
-        </p>
-      </li>
-      <li>
-        <a href="javascript:;" class="btn" @click="submitSignIn">注册</a>
-      </li>
-    </ul>
+    <scroll class="sign-in-cont">
+      <div>
+        <ul>
+          <li>
+            <label>姓名</label>
+            <p>
+              <input type="text" v-model="name" placeholder="请输入姓名" />
+            </p>
+          </li>
+          <li>
+            <label>手机号</label>
+            <p>
+              <input type="tel" v-model="phoneNumber" maxlength="11" placeholder="请输入手机号" />
+            </p>
+          </li>
+          <li>
+            <label>密码</label>
+            <p>
+              <input type="password" v-model="password" maxlength="11" placeholder="请输入密码" />
+            </p>
+          </li>
+          <li>
+            <label>确认密码</label>
+            <p>
+              <input type="password" v-model="confirmPassword" maxlength="11" placeholder="请确认密码" />
+            </p>
+          </li>
+          <li>
+            <label>验证码</label>
+            <p>
+              <input type="text" v-model="phoneCode" placeholder="请输入验证码" />
+              <a href="javascript:;" @click="getPhoneCode">{{btnText}}</a>
+            </p>
+          </li>
+          <li>
+            <label>推荐码</label>
+            <p>
+              <input type="text" v-model="upCode" :disabled="isDisabled" placeholder="请输入推荐码" />
+            </p>
+          </li>
+          <li>
+            <a href="javascript:;" class="btn" @click="submitSignIn">注册</a>
+          </li>
+        </ul>
+      </div>
+    </scroll>
     <tips :text="text" ref="tips"></tips>
   </div>
 </template>
@@ -50,6 +54,7 @@
 <script>
 import Tab from 'components/tab/tab'
 import Tips from 'base/tips/tips'
+import Scroll from 'base/scroll/scroll'
 import {sendVerificationCode, register} from 'base/api/api'
 import {SUCCESS} from 'base/api/config'
 
@@ -169,7 +174,8 @@ export default {
   },
   components: {
     Tab,
-    Tips
+    Tips,
+    Scroll
   }
 }
 </script>
@@ -178,62 +184,69 @@ export default {
   @import "~common/stylus/variable"
   @import "~common/stylus/mixin"
   .sign-in
-    position fixed
-    top 0
-    left 0
-    right 0
-    bottom 0
-    bg-image('signInBg.png')
-    background-position center bottom
-    background-size contain
-    background-repeat no-repeat
     h2
       padding 15px 0
       text-align center
       font-size (36/2)px
       color #666
       line-height 25px
-    ul
-      li
-        margin 10px (75/2)px
-        padding-bottom 10px
-        border-bottom 1px solid #e4e4e4
-        text-align center
-        &:last-child{
-          border-bottom 0
-        }
-        label
-          display block
-          text-align left
-          height 20px
-          font-size (28/2)px
-          color #C3C3C3
-          margin-bottom 10px
-        p
-          display flex
-          align-items center
-          input
-            flex 1
-            height (45/2)px
-            color #999
-            vertical-align middle
-            &[disabled="disabled"]
-              background-color transparent
-          a
-            display block
-            padding 10px 10px
-            font-size 14px
-            vertical-align middle
-            background-color rgba(255,97,84,.25)
-            border-radius (56/2)px
-            color rgb(255,97,84)
-        .btn
-          btn()
-          width 250px
-          height 44px
-          line-height 44px
+    .sign-in-cont
+      position absolute
+      overflow hidden
+      top 60px
+      left 0
+      right 0
+      bottom 0
+      bg-image('signInBg.png')
+      background-position center bottom
+      background-size contain
+      background-repeat no-repeat
+      ul
+        li
+          margin 10px (75/2)px
+          padding-bottom 10px
+          border-bottom 1px solid #e4e4e4
           text-align center
-          color $color-background
-          margin 15px auto
-          background-image: linear-gradient(-27deg, #FFA976 5%, #FF6154 100%)
+          &:last-child{
+            border-bottom 0
+          }
+          label
+            display block
+            text-align left
+            height 20px
+            font-size (28/2)px
+            color #C3C3C3
+            margin-bottom 10px
+          p
+            position relative
+            display flex
+            justify-content space-between
+            align-items center
+            input
+              width 100%
+              box-sizing border-box
+              height (45/2)px
+              color #333
+              vertical-align middle
+              background-color transparent
+              &::placeholder
+                color #999
+            a
+              flex 0 0 87x
+              width 120px
+              padding 10px 0
+              font-size 14px
+              vertical-align middle
+              background-color rgba(255,97,84,.25)
+              border-radius (56/2)px
+              color rgb(255,97,84)
+          .btn
+            btn()
+            width 250px
+            height 44px
+            line-height 44px
+            text-align center
+            color $color-background
+            margin 15px auto
+            background-image: linear-gradient(-27deg, #FFA976 5%, #FF6154 100%)
 </style>

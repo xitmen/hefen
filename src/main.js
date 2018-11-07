@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 fastclick.attach(document.body)
 // VueLazyLoad 初始化
 Vue.use(VueLazyLoad, {
-  loading: require('common/image/default.png')
+  loading: require('common/image/logo.jpg')
 })
 
 // APP调用javascript

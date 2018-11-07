@@ -38,7 +38,9 @@
       </div>
       <confirm text="请选同意协议" ref="confirm" @confirm="selectedCheck"></confirm>
       <tips :text="text" ref="tips"></tips>
-      <iframe :src="applyUrl" class="applyUrl" v-show="isIframe"></iframe>
+      <div class="applyUrl" v-show="isIframe">
+        <iframe :src="applyUrl"></iframe>
+      </div>
     </div>
   </transition>
 </template>
@@ -59,7 +61,7 @@ export default {
   data () {
     return {
       share: false,
-      isChecked: false,
+      isChecked: true,
       text: '',
       applyUrl: '',
       isIframe: false,
@@ -147,13 +149,16 @@ export default {
       position fixed
       z-index 2
       top 45px
-      width 100vw
-      height 100vh
-      padding-bottom 45px
       background-color #fff
       left 0
       right 0
       bottom 0
+      iframe
+        width 100%
+        height 100%
+        position absolute
+        top 0
+        left 0
     .apply-card-content
       bg-image('banner.png')
       background-repeat no-repeat

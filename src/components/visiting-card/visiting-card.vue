@@ -1,7 +1,6 @@
 <template>
   <transition name="slide">
     <div class="visiting-card">
-      <tab ref="tab" title="名片" :goAppHome="goAppHome" :bgColor="bgColor" :share="share"></tab>
       <div class="visiting-card-content">
         <div class="code-img">
           <div id="qrcode"></div>
@@ -36,7 +35,7 @@ export default {
       if ('box' in window) {
         this.isApp = window.box.getAppSystem()
       } else {
-        this.text = '立即下载'
+        this.text = '立即加入'
         this.isApp = false
       }
     } catch (e) {
@@ -107,7 +106,7 @@ export default {
     background-repeat no-repeat
     background-size contain
     background-position center top
-    padding 160px 15px 35px 15px
+    padding 160px 15px 0 15px
     .visiting-card-content
       position relative
       width 300px
@@ -144,7 +143,7 @@ export default {
           color $color-gray-5
           padding-right 10px
     p
-      margin-top (113/2)px
+      margin-top 50px
       text-align center
       a
         btn()
