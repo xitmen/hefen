@@ -1,6 +1,7 @@
 <template>
   <transition name="slide">
     <div class="visiting-card">
+      <tab title="名片" :share="share" :goAppHome="goAppHome" ref="tab" v-show="isShow"></tab>
       <div class="visiting-card-content">
         <div class="code-img">
           <div id="qrcode"></div>
@@ -28,12 +29,14 @@ export default {
     }
   },
   created () {
+    this.isShow = false
     this.share = false
     this.bgColor = false
     this.goAppHome = true
     try {
       if ('box' in window) {
         this.isApp = window.box.getAppSystem()
+        this.isShow = true
       } else {
         this.text = '立即加入'
         this.isApp = false
@@ -74,6 +77,7 @@ export default {
       qrcode.makeCode(`${SIGN_IN}signIn?upCode=${this.code}`)
     },
     shareHandler () {
+      debugger
       if (this.isApp) {
         this.$refs.tab.shareHandler(true)
       } else {
@@ -94,8 +98,8 @@ export default {
   @import "~common/stylus/variable"
   @import "~common/stylus/mixin"
   .visiting-card
-    position fixed
-    overflow-y auto
+    position absolute
+    overflow hidden
     z-index 100
     top 0
     left 0

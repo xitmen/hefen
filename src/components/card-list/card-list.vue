@@ -156,7 +156,7 @@ export default {
             color $color-gray-5
             margin-bottom (24/2)px
           .desc
-            font-size (11/2)px
+            font-size 12px
             color $color-gray-5
             .num
               color $color-red

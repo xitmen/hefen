@@ -137,8 +137,7 @@ export default {
   @import "~common/stylus/variable"
   @import "~common/stylus/mixin"
   .applyCard
-    position fixed
-    overflow-y auto
+    position absolute
     z-index 100
     top 0
     left 0

@@ -1,6 +1,7 @@
 <template>
   <transition name="slide">
     <div class="team">
+      <tab ref="tab" title="团队" :goAppHome="goAppHome" :bgColor="bgColor" :share="share"></tab>
       <div class="team-content">
         <div class="code-img">
           <div id="qrcode"></div>

@@ -91,7 +91,7 @@ export default {
   @import "~common/stylus/variable"
   @import "~common/stylus/mixin"
   .tab
-    position fixed
+    position absolute
     top 0
     right 0
     left 0
@@ -111,10 +111,7 @@ export default {
     .back,.share
       width (44/2)px
       height (44/2)px
-      &.back
-        margin-left 14px
-      &.share
-        margin-right 14px
+      padding 13px
       .icon-back,.icon-share, .icon-back-white
         display inline-block
         width 100%
