@@ -76,7 +76,7 @@ export default {
             return Number(a.sort) - Number(b.sort)
           })
           this.cardList = data.data.filter(item => {
-            return item.apply_url
+            return item.apply_url || Number(item.credit_card_cnt)
           })
           this.cardId = this.cardList[0].id
           this.applyUrl = this.cardList[0].apply_url

@@ -110,7 +110,9 @@ export default {
           data.data.sort((a, b) => {
             return Number(a.sort) - Number(b.sort)
           })
-          this.cardList = data.data
+          this.cardList = data.data.filter(item => {
+            return Number(item.goods_cnt)
+          })
           this.cardId = this.cardList[0].id
           this.keywords = this.cardList[this.currentCard].keywords
         }
