@@ -11,6 +11,26 @@
 </template>
 
 <script>
+const shareMsg = {
+  1: {
+    title: '免费在线办理信用卡，开启你的信用生活',
+    subTitle: '免费办理信用卡，额度高、审核快、手续简单，银联在线办理信用卡全程为你服务'
+  },
+  2: {
+    title: '信用卡积分一键兑换',
+    subTitle: 'hi！你的银行卡积分过期了吗？超高兑换价、快速结算，所有热门银行积分兑换尽在掌握！'
+  },
+  3: {
+    title: '联通、移动、电信通讯积分一键兑换',
+    subTitle: 'hi！你的通讯积分过期了吗？联通、移动、电信通讯积分一键兑换，超高兑换价、快速结算！'
+  }
+}
+
+const defaultShareMsg = {
+  title: '快快加入盒粉之家!',
+  subTitle: '盒粉之家' 
+}
+
 export default {
   name: 'tab',
   props: {
@@ -29,6 +49,10 @@ export default {
     goAppHome: {
       type: Boolean,
       default: false
+    },
+    type: {
+      type: String,
+      default: ''
     }
   },
   created () {
@@ -67,9 +91,13 @@ export default {
       }
     },
     shareHandler (flag) {
+      if (this.type) {
+        defaultShareMsg.title = shareMsg[this.type].title
+        defaultShareMsg.subTitle = shareMsg[this.type].subTitle
+      }
       if (flag === true || this.share) {
         try {
-          window.box.shareFunction(`${location.href}?uid=${this.uid}`, '快快加入盒粉之家!')
+          window.box.shareFunction(`${location.href}?uid=${this.uid}`, defaultShareMsg.title, defaultShareMsg.subTitle)
         } catch (e) {
           alert(`没有找到window.box.shareFunction${location.href}`)
         }

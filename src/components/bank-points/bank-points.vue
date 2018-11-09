@@ -1,6 +1,6 @@
 <template>
   <div class="bank-list">
-    <tab :goAppHome="goAppHome" title="积分列表"></tab>
+    <tab :goAppHome="goAppHome" title="积分列表" type="2"></tab>
     <div class="bank-list-wrapper">
       <left-nav :data="cardList" :currentCard="currentCard" @selectItem="selectCard"></left-nav>
       <div class="bank-list-content">

@@ -1,6 +1,6 @@
 <template>
   <div class="points-list">
-    <tab :goAppHome="goAppHome" title="积分列表"></tab>
+    <tab :goAppHome="goAppHome" title="积分列表" type="3"></tab>
     <div class="points-list-wrapper">
       <left-nav :data="pointsList" :currentCard="currentPoints" @selectItem="selectCard"></left-nav>
       <div class="points-list-content">
