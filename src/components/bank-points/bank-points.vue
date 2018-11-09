@@ -107,6 +107,9 @@ export default {
           data.data.map((item) => {
             item.keywords = this.mapKey[item.name]
           })
+          data.data.sort((a, b) => {
+            return Number(a.sort) - Number(b.sort)
+          })
           this.cardList = data.data
           this.cardId = this.cardList[0].id
           this.keywords = this.cardList[this.currentCard].keywords

@@ -1,7 +1,6 @@
 <template>
   <transition name="slide">
     <div class="team">
-      <tab ref="tab" title="名片" :goAppHome="goAppHome" :bgColor="bgColor" :share="share"></tab>
       <div class="team-content">
         <div class="code-img">
           <div id="qrcode"></div>
@@ -109,7 +108,9 @@ export default {
       position relative
       width 250px
       height 309px
-      margin 150px auto 0 auto
+      left 50%
+      top 50%
+      transform translate(-50%, -50%)
       background-size cover
       bg-image('title.png')
       box-sizing border-box
@@ -136,7 +137,7 @@ export default {
         font-size 22px
     .share-btn
       position fixed
-      top 80%
+      top 86%
       left 50%
       transform translateX(-50%)
       text-align center

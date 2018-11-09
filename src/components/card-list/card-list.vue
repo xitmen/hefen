@@ -29,6 +29,7 @@
         <div class="loading-content" v-show="!cardListData">
           <loading></loading>
         </div>
+        <tips :text="text" ref="tips"></tips>
       </div>
     </div>
     <router-view></router-view>
@@ -37,6 +38,7 @@
 
 <script>
 import Tab from 'components/tab/tab'
+import Tips from 'base/tips/tips'
 import Scroll from 'base/scroll/scroll'
 import LeftNav from 'base/left-nav/left-nav'
 import Loading from 'base/loading/loading'
@@ -57,6 +59,7 @@ export default {
     }
   },
   created () {
+    this.text = '该银行暂未开通。。。'
     this.getCardList()
     this.goAppHome = true
   },
@@ -64,23 +67,32 @@ export default {
     selectCard (index, cardId) {
       this.currentCard = index
       this.cardId = cardId
-      this.applyUrl = this.cardList[cardId].apply_url
+      this.applyUrl = this.cardList[index].apply_url
     },
     getCardList () {
       getCardList({type: 1}).then((data) => {
         if (data.code === SUCCESS) {
-          this.cardList = data.data
+          data.data.sort((a, b) => {
+            return Number(a.sort) - Number(b.sort)
+          })
+          this.cardList = data.data.filter(item => {
+            return item.apply_url
+          })
           this.cardId = this.cardList[0].id
           this.applyUrl = this.cardList[0].apply_url
         }
       })
     },
     applyCardHandler (item) {
-      this.$router.push({
-        path: `/card-list/${item.bank_id}`
-      })
-      item.apply_url = this.applyUrl
-      this.setCardInfo(item)
+      if (this.applyUrl) {
+        this.$router.push({
+          path: `/card-list/${item.bank_id}`
+        })
+        item.apply_url = this.applyUrl
+        this.setCardInfo(item)
+      } else {
+        this.$refs.tips.show()
+      }
     },
     ...mapMutations({
       setCardInfo: 'SET_CARD_INFO'
@@ -98,6 +110,7 @@ export default {
   },
   components: {
     Tab,
+    Tips,
     Scroll,
     LeftNav,
     Default,

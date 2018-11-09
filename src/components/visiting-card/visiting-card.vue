@@ -106,12 +106,14 @@ export default {
     background-repeat no-repeat
     background-size contain
     background-position center top
-    padding 160px 15px 0 15px
+    padding 0 15px 0 15px
     .visiting-card-content
       position relative
       width 300px
       height 300px
-      margin 0 auto
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
       background-color $color-background
       border-radius 15px
       display flex
@@ -143,7 +145,10 @@ export default {
           color $color-gray-5
           padding-right 10px
     p
-      margin-top 50px
+      position absolute
+      bottom 8%
+      left 50%
+      transform translateX(-50%)
       text-align center
       a
         btn()
