@@ -66,7 +66,7 @@ export default {
       applyUrl: '',
       isIframe: false,
       ajax: {
-        uid: '2',
+        uid: '',
         name: '',
         id_card_no: '',
         phone: '',
@@ -76,14 +76,19 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'cardInfo'
+      'cardInfo',
+      'uid'
     ])
   },
   created () {
     try {
-      this.uid = window.box.getUidFromApp()
+      this.ajax.uid = window.box.getUidFromApp()
     } catch (e) {
-      this.uid = '2'
+      if (this.uid) {
+        this.ajax.uid = this.uid
+      } else {
+        this.ajax.uid = '2'
+      }
     }
     if (!this.cardInfo.bank_id) {
       this.$router.push({
@@ -185,6 +190,7 @@ export default {
             border-bottom 1px solid $color-gray-3
             display flex
             justify-content space-between
+            align-items center
             padding 10px 0
             span
               display inline-block
@@ -205,6 +211,7 @@ export default {
                   bg-image("ico02.png")
             input
               flex 1
+              padding 6px 0
               text-align right
               font-size small
               &::input-placeholder
@@ -232,7 +239,7 @@ export default {
               &.checked
                 background-image url("./ico04.png")
         .next-step
-          margin-top (113/2)px
+          margin-top (80/2)px
           text-align center
           a
             btn()

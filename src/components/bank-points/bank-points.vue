@@ -1,6 +1,6 @@
 <template>
   <div class="bank-list">
-    <tab :goAppHome="goAppHome" title="积分列表" type="2"></tab>
+    <tab :goAppHome="goAppHome" title="积分列表" type="2" :share="share"></tab>
     <div class="bank-list-wrapper">
       <left-nav :data="cardList" :currentCard="currentCard" @selectItem="selectCard"></left-nav>
       <div class="bank-list-content">
@@ -88,6 +88,14 @@ export default {
       '汇丰银行': 'hf',
       '地方银行': 'df'
     }
+    if ('box' in window) {
+      this.share = true
+    } else {
+      this.share = false
+    }
+    if (this.$route.query.uid) {
+      this.setUid(this.$route.query.uid)
+    }
   },
   methods: {
     selectCard (index, cardId) {
@@ -138,7 +146,8 @@ export default {
       setCardInfo: 'SET_CARD_INFO',
       setBankCode: 'SET_BANK_CODE',
       setGoodsName: 'SET_GOODS_NAME',
-      setPointsType: 'SET_POINTS_TYPE'
+      setPointsType: 'SET_POINTS_TYPE',
+      setUid: 'SET_UID'
     })
   },
   watch: {
@@ -147,6 +156,11 @@ export default {
       getCreditCardGoods(this.cardId).then((data) => {
         this.pointsData = data.data.goods_list
       })
+    },
+    '$route' (to, from) {
+      if (to.query.uid) {
+        this.setUid(this.$route.query.uid)
+      }
     }
   },
   components: {

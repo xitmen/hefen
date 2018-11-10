@@ -1,6 +1,6 @@
 <template>
   <div class="card-list">
-    <tab :goAppHome="goAppHome" title="信用卡申请" type="1"></tab>
+    <tab :goAppHome="goAppHome" title="信用卡申请" type="1" :share="share"></tab>
     <div class="card-list-wrapper">
       <left-nav :data="cardList" :currentCard="currentCard" @selectItem="selectCard"></left-nav>
       <div class="card-list-content">
@@ -62,8 +62,19 @@ export default {
     this.text = '该银行暂未开通。。。'
     this.getCardList()
     this.goAppHome = true
+    if (this.$route.query.uid) {
+      this.setUid(this.$route.query.uid)
+    }
+    if ('box' in window) {
+      this.share = true
+    } else {
+      this.share = false
+    }
   },
   methods: {
+    setUserUid (uid) {
+      this.setUid(uid)
+    },
     selectCard (index, cardId) {
       this.currentCard = index
       this.cardId = cardId
@@ -95,7 +106,8 @@ export default {
       }
     },
     ...mapMutations({
-      setCardInfo: 'SET_CARD_INFO'
+      setCardInfo: 'SET_CARD_INFO',
+      setUid: 'SET_UID'
     })
   },
   watch: {
@@ -106,6 +118,11 @@ export default {
           this.cardListData = data.data
         }
       })
+    },
+    '$route' (to, from) {
+      if (to.query.uid) {
+        this.setUid(this.$route.query.uid)
+      }
     }
   },
   components: {

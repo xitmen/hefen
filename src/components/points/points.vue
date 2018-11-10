@@ -1,6 +1,6 @@
 <template>
   <div class="points-list">
-    <tab :goAppHome="goAppHome" title="积分列表" type="3"></tab>
+    <tab :goAppHome="goAppHome" title="积分列表" type="3" :share="share"></tab>
     <div class="points-list-wrapper">
       <left-nav :data="pointsList" :currentCard="currentPoints" @selectItem="selectCard"></left-nav>
       <div class="points-list-content">
@@ -87,6 +87,15 @@ export default {
     this.goAppHome = true
     this.getCardData()
     this.setPointsType(this.printsType[this.currentPoints])
+    if ('box' in window) {
+      this.share = true
+    } else {
+      this.share = false
+    }
+
+    if (this.$route.query.uid) {
+      this.setUid(this.$route.query.uid)
+    }
   },
   methods: {
     selectCard (index) {
@@ -128,8 +137,16 @@ export default {
     ...mapMutations({
       setPointsType: 'SET_POINTS_TYPE',
       setGoodsName: 'SET_GOODS_NAME',
-      setBankCode: 'SET_BANK_CODE'
+      setBankCode: 'SET_BANK_CODE',
+      setUid: 'SET_UID'
     })
+  },
+  watch: {
+    '$route' (to, from) {
+      if (to.query.uid) {
+        this.setUid(this.$route.query.uid)
+      }
+    }
   },
   components: {
     Tab,

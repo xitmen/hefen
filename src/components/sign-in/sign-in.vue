@@ -36,7 +36,7 @@
             </p>
           </li>
           <li>
-            <label>推荐码</label>
+            <label>上级推荐码</label>
             <p>
               <input type="text" v-model="upCode" :disabled="isDisabled" placeholder="请输入推荐码" />
             </p>

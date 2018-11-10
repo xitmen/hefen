@@ -57,15 +57,21 @@ export default {
   computed: {
     ...mapGetters([
       'goodsName',
-      'pointsType'
+      'pointsType',
+      'uid'
     ])
   },
   created () {
     this.share = false
+    this.userUid = null
     try {
       this.uid = window.box.getUidFromApp()
     } catch (e) {
-      this.uid = '2'
+      if (this.uid) {
+        this.userUid = this.uid
+      } else {
+        this.userUid = '2'
+      }
     }
   },
   mounted () {
@@ -95,7 +101,7 @@ export default {
         this.$refs.tips.show()
       } else {
         this.isLoading = true
-        submitOrder({uid: this.uid, title: this.goodsName.name, good_id: this.goodsName.id, type: this.pointsType, order_str: this.orderInfo, images: this.imgKeys.join('#')}).then((data) => {
+        submitOrder({uid: this.userUid, title: this.goodsName.name, good_id: this.goodsName.id, type: this.pointsType, order_str: this.orderInfo, images: this.imgKeys.join('#')}).then((data) => {
           this.isLoading = false
           if (data.code === String(SUCCESS)) {
             this.clearParam()

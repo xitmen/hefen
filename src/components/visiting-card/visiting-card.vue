@@ -77,7 +77,6 @@ export default {
       qrcode.makeCode(`${SIGN_IN}signIn?upCode=${this.code}`)
     },
     shareHandler () {
-      debugger
       if (this.isApp) {
         this.$refs.tab.shareHandler(true)
       } else {

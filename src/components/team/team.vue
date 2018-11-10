@@ -1,7 +1,7 @@
 <template>
   <transition name="slide">
     <div class="team">
-      <tab ref="tab" title="团队" :goAppHome="goAppHome" :bgColor="bgColor" :share="share"></tab>
+      <tab ref="tab" v-show="isShow" title="团队" :goAppHome="goAppHome" :bgColor="bgColor" :share="share"></tab>
       <div class="team-content">
         <div class="code-img">
           <div id="qrcode"></div>
@@ -26,7 +26,8 @@ export default {
   data () {
     return {
       text: '分享',
-      code: ''
+      code: '',
+      isShow: false
     }
   },
   created () {
@@ -36,6 +37,7 @@ export default {
     try {
       if ('box' in window) {
         this.isApp = window.box.getAppSystem()
+        this.isShow = true
       } else {
         this.text = '立即下载'
         this.isApp = false
