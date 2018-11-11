@@ -65,7 +65,7 @@ export default {
     this.share = false
     this.userUid = null
     try {
-      this.uid = window.box.getUidFromApp()
+      this.userUid = window.box.getUidFromApp()
     } catch (e) {
       if (this.uid) {
         this.userUid = this.uid
