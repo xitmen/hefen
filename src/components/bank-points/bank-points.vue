@@ -1,6 +1,6 @@
 <template>
   <div class="bank-list">
-    <tab :goAppHome="goAppHome" title="积分列表" type="2" :share="share" :isBack=isBack></tab>
+    <tab :goAppHome="goAppHome" class="tab" title="积分列表" type="2" :share="share" :isBack=isBack></tab>
     <div class="bank-list-wrapper">
       <left-nav :data="cardList" :currentCard="currentCard" @selectItem="selectCard"></left-nav>
       <div class="bank-list-content">
@@ -181,7 +181,7 @@ export default {
   @import "~common/stylus/mixin"
   .bank-list-wrapper
     position fixed
-    top 45px
+    top 0
     left 0
     right 0
     bottom 0

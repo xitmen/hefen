@@ -12,7 +12,7 @@
             </li>
             <li>
               <span class="name"><i class="icon-card-id"></i></span>
-              <input type="tel" maxLength="18" v-model="ajax.id_card_no" placeholder="请填写申卡人身份证号码"/>
+              <input type="text" maxLength="18" v-model="ajax.id_card_no" placeholder="请填写申卡人身份证号码"/>
             </li>
             <li>
               <span class="name"><i class="icon-mobile"></i></span>
@@ -149,7 +149,7 @@ export default {
     .applyUrl
       position fixed
       z-index 2
-      top 45px
+      top 0
       background-color #fff
       left 0
       right 0
@@ -164,8 +164,8 @@ export default {
       bg-image('banner.png')
       background-repeat no-repeat
       background-size contain
-      background-position center 45px
-      padding 160px 15px 35px 15px
+      background-position center 0
+      padding 115px 15px 35px 15px
       .apply-card-info
         box-sizing border-box
         background-color #fff
@@ -209,7 +209,7 @@ export default {
               width 100%
               height 55px
               text-align right
-              font-size small
+              font-size 16px
               &::input-placeholder
                 color #666
         .tips

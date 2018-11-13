@@ -164,7 +164,7 @@ export default {
     position fixed
     .exchange-scroll
       position fixed
-      top 48px
+      top 0
       left 0
       right 0
       bottom 60px

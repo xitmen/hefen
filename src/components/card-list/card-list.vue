@@ -143,7 +143,7 @@ export default {
   @import "~common/stylus/mixin"
   .card-list-wrapper
     position fixed
-    top 45px
+    top 0
     left 0
     right 0
     bottom 0

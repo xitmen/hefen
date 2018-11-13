@@ -74,6 +74,7 @@ export default {
     } catch (e) {
       this.uid = '2'
     }
+    this.shareHandler()
   },
   methods: {
     back () {
@@ -99,11 +100,12 @@ export default {
         defaultShareMsg.title = shareMsg[this.type].title
         defaultShareMsg.subTitle = shareMsg[this.type].subTitle
       }
+      // alert(defaultShareMsg.title)
       if (flag === true || this.share) {
         try {
           window.box.shareFunction(`${location.href}?uid=${this.uid}`, defaultShareMsg.title, defaultShareMsg.subTitle)
         } catch (e) {
-          alert(`没有找到window.box.shareFunction${location.href}`)
+          // alert(`没有找到window.box.shareFunction${location.href}`)
         }
       }
     },

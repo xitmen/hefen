@@ -111,7 +111,7 @@ export default {
     background-position center top
     padding 0 15px 0 15px
     .visiting-card-content
-      position relative
+      position absolute
       width 300px
       height 300px
       top 50%
@@ -119,16 +119,18 @@ export default {
       transform translate(-50%, -50%)
       background-color $color-background
       border-radius 15px
-      display flex
-      justify-content center
-      flex-direction column
-      align-items center
       box-shadow 0 0 10px #ccc
       .code-img
-        position absolute
         width 200px
         height 200px
+        text-align center
+        #qrcode
+          position absolute
+          top 50%
+          left 50%
+          transform translate(-50%, -50%)
         img
+          text-align center
           position absolute
           top 50%
           left 50%
