@@ -38,9 +38,6 @@
       </div>
       <confirm text="请选同意协议" ref="confirm" @confirm="selectedCheck"></confirm>
       <tips :text="text" ref="tips"></tips>
-      <div class="applyUrl" v-show="isIframe">
-        <iframe :src="applyUrl"></iframe>
-      </div>
     </div>
   </transition>
 </template>
@@ -124,8 +121,7 @@ export default {
       } else {
         sendCardAndUserInfo(data).then((data) => {
           if (data.code === String(SUCCESS)) {
-            this.isIframe = true
-            this.applyUrl = this.cardInfo.apply_url
+            location.href = this.cardInfo.apply_url
           }
         })
       }
@@ -187,12 +183,10 @@ export default {
         ul
           margin 0 21px
           li
-            margin-bottom 10px
             border-bottom 1px solid $color-gray-3
             display flex
             justify-content space-between
             align-items center
-            padding 10px 0
             span
               display inline-block
               flex 0 0 (36/2)px
@@ -212,7 +206,8 @@ export default {
                   bg-image("ico02.png")
             input
               flex 1
-              padding 6px 0
+              width 100%
+              height 55px
               text-align right
               font-size small
               &::input-placeholder
