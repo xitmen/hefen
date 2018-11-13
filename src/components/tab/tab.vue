@@ -1,7 +1,7 @@
 <template>
   <div class="tab" :class="{'isBg': !bgColor }">
     <div class="back" @click="back">
-      <i :class="getIconBack()"></i>
+      <i :class="getIconBack()" v-show="isBack"></i>
     </div>
     <div class="title">{{title}}</div>
     <div class="share" @click="shareHandler">
@@ -42,6 +42,10 @@ export default {
       type: Boolean,
       default: true
     },
+    isBack: {
+      type: Boolean,
+      default: true
+    },
     bgColor: {
       type: Boolean,
       default: true
@@ -77,7 +81,7 @@ export default {
         try {
           window.box.backFunction()
         } catch (e) {
-          alert('没有找到window.box.backFunction')
+          history.go(-1)
         }
       } else {
         this.$router.back()
@@ -134,6 +138,7 @@ export default {
       border-bottom 1px solid transparent
       color #fff
     .title
+      flex 1
       font-size (36/2)px
       text-align center
     .back,.share

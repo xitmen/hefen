@@ -1,6 +1,6 @@
 <template>
   <div class="card-list">
-    <tab :goAppHome="goAppHome" title="信用卡申请" type="1" :share="share"></tab>
+    <tab :goAppHome="goAppHome" title="信用卡申请" type="1" :share="share" :isBack=isBack></tab>
     <div class="card-list-wrapper">
       <left-nav :data="cardList" :currentCard="currentCard" @selectItem="selectCard"></left-nav>
       <div class="card-list-content">
@@ -51,6 +51,7 @@ export default {
   name: 'card-list',
   data () {
     return {
+      isBack: false,
       cardList: [],
       currentCard: 0,
       cardId: null,
@@ -66,6 +67,7 @@ export default {
       this.setUid(this.$route.query.uid)
     }
     if ('box' in window) {
+      this.isBack = true
       this.share = true
     } else {
       this.share = false

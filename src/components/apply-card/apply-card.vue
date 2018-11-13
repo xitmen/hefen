@@ -31,7 +31,7 @@
             <a href="javascript:;" class="btn" @click="nextStep">下一步</a>
           </p>
           <div class="message">
-            <p><img src="./icon05.png" width="15px" />本服务有银联提供</p>
+            <p><img src="./icon05.png" width="15px" />本服务由银联提供</p>
             <p>信用卡申请不需要任何费用，谨防电话诈骗</p>
           </div>
         </div>
@@ -83,6 +83,7 @@ export default {
   created () {
     try {
       this.ajax.uid = window.box.getUidFromApp()
+      this.isBack = true
     } catch (e) {
       if (this.uid) {
         this.ajax.uid = this.uid

@@ -1,6 +1,6 @@
 <template>
   <div class="points-list">
-    <tab :goAppHome="goAppHome" title="积分列表" type="3" :share="share"></tab>
+    <tab :goAppHome="goAppHome" title="积分列表" type="3" :share=share :isBack=isBack></tab>
     <div class="points-list-wrapper">
       <left-nav :data="pointsList" :currentCard="currentPoints" @selectItem="selectCard"></left-nav>
       <div class="points-list-content">
@@ -56,6 +56,7 @@ export default {
   name: 'points-list',
   data () {
     return {
+      isBack: false,
       pointsList: [{
         id: 0,
         name: '移动',
@@ -88,6 +89,7 @@ export default {
     this.getCardData()
     this.setPointsType(this.printsType[this.currentPoints])
     if ('box' in window) {
+      this.isBack = true
       this.share = true
     } else {
       this.share = false

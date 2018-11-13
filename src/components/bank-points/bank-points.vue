@@ -1,6 +1,6 @@
 <template>
   <div class="bank-list">
-    <tab :goAppHome="goAppHome" title="积分列表" type="2" :share="share"></tab>
+    <tab :goAppHome="goAppHome" title="积分列表" type="2" :share="share" :isBack=isBack></tab>
     <div class="bank-list-wrapper">
       <left-nav :data="cardList" :currentCard="currentCard" @selectItem="selectCard"></left-nav>
       <div class="bank-list-content">
@@ -57,6 +57,7 @@ export default {
   name: 'card-list',
   data () {
     return {
+      isBack: false,
       cardList: [],
       currentCard: 0,
       cardId: null,
@@ -89,6 +90,7 @@ export default {
       '地方银行': 'df'
     }
     if ('box' in window) {
+      this.isBack = true
       this.share = true
     } else {
       this.share = false
