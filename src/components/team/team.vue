@@ -31,7 +31,7 @@ export default {
     }
   },
   created () {
-    this.share = false
+    this.share = true
     this.bgColor = false
     this.goAppHome = true
     try {
