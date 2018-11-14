@@ -95,7 +95,7 @@ export default {
         return 'icon-back-white'
       }
     },
-    shareHandler (flag) {
+    shareHandler (flag, team) {
       if (this.type) {
         defaultShareMsg.title = shareMsg[this.type].title
         defaultShareMsg.subTitle = shareMsg[this.type].subTitle
@@ -103,7 +103,11 @@ export default {
       // alert(defaultShareMsg.title)
       if (flag === true || this.share) {
         try {
-          window.box.shareFunction(`${location.href}?uid=${this.uid}`, defaultShareMsg.title, defaultShareMsg.subTitle)
+          if (team) {
+            window.box.shareSinger(`${location.href}?uid=${this.uid}`, defaultShareMsg.title, defaultShareMsg.subTitle)
+          } else {
+            window.box.shareFunction(`${location.href}?uid=${this.uid}`, defaultShareMsg.title, defaultShareMsg.subTitle)
+          }
         } catch (e) {
           // alert(`没有找到window.box.shareFunction${location.href}`)
         }

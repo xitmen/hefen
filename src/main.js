@@ -16,6 +16,11 @@ Vue.use(VueLazyLoad, {
   loading: require('common/image/logo.jpg')
 })
 
+// 禁止页面滑动
+document.addEventListener('touchmove', function(e) {
+  e && e.preventDefault()
+})
+
 // APP调用javascript
 function javaCallJs () {
   alert('Android 调用的JS函数')

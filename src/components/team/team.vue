@@ -79,7 +79,7 @@ export default {
     },
     shareHandler () {
       if (this.isApp) {
-        this.$refs.tab.shareHandler(true)
+        this.$refs.tab.shareHandler(true, true)
       } else {
         this.$refs.tab.download()
       }
