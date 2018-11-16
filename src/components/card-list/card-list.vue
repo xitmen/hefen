@@ -14,6 +14,7 @@
                 <div class="text">
                   <h2 class="title">{{item.name}}</h2>
                   <h3 class="sub-title">{{item.intro}}</h3>
+                  <h4 class="sub-price" v-show="share">【&yen;{{item.card_money}}/张】</h4>
                   <div class="desc">
                     <span class="num">{{item.cnt}}</span>
                     <span>人已申请</span>
@@ -169,11 +170,15 @@ export default {
           h2
             font-size (28/2)px
             line-height (34/2)px
-            margin-bottom 5px
+            padding-bottom 5px
           h3
             font-size (24/2)px
             color $color-gray-5
-            margin-bottom (24/2)px
+            margin-bottom 8px
+          h4 
+            font-size (28/2)px
+            line-height (34/2)px
+            color $color-gray-5
           .desc
             font-size 12px
             color $color-gray-5
