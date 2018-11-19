@@ -72,7 +72,8 @@ export default {
       upCode: '',
       password: '',
       confirmPassword: '',
-      isDisabled: false
+      isDisabled: false,
+      isSubmit: true
     }
   },
   created () {
@@ -85,6 +86,10 @@ export default {
   },
   methods: {
     submitSignIn() {
+      let _this = this
+      if (!_this.isSubmit) {
+        return
+      }
       if (!/^[\u4e00-\u9fa5]+$/.test(this.name) || this.name.length > 4) {
         this.text = '请输入真实姓名!'
         this.$refs.tips.show()
@@ -110,6 +115,7 @@ export default {
         this.$refs.tips.show()
         return
       }
+      _this.isSubmit = false
       register({
         name: this.name,
         phone: this.phoneNumber,
@@ -118,6 +124,7 @@ export default {
         password: this.password,
         confirmPassword: this.confirmPassword
       }).then(data => {
+        _this.isSubmit = true
         if (data.code === String(SUCCESS)) {
           this.text = '注册成功!'
           this.$refs.tips.show()
@@ -129,6 +136,7 @@ export default {
           this.$refs.tips.show()
         }
       }, () => {
+        _this.isSubmit = true
         this.text = '注册失败，请重试!'
         this.$refs.tips.show()
       })

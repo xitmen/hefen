@@ -7,7 +7,8 @@
           <div id="qrcode"></div>
           <img src="/static/img/logo.jpg" />
         </div>
-        <span><em>邀请码:</em>{{code}}</span>
+        <span class=code v-show="code"><em>盒粉推荐码:</em>{{code}}</span>
+        <span class="hx_code" v-show="hx_code"><em>环迅推荐码:</em>{{hx_code}}</span>
       </div>
       <p class="share-btn">
         <a href="javascript:;" class="btn" @click="shareHandler">{{text}}</a>
@@ -25,7 +26,8 @@ export default {
   data () {
     return {
       text: '分享',
-      code: ''
+      code: '',
+      hx_code: ''
     }
   },
   created () {
@@ -63,6 +65,7 @@ export default {
       getCusinessCard({uid: this.uid}).then((data) => {
         if (data.code === SUCCESS && data.data) {
           this.code = data.data.code
+          this.hx_code = data.data.hx_code
           this.setCodeImg()
         } else {
           alert('UID错误')
@@ -113,7 +116,7 @@ export default {
     .visiting-card-content
       position absolute
       width 300px
-      height 300px
+      height 350px
       top 50%
       left 50%
       transform translate(-50%, -50%)
@@ -142,9 +145,12 @@ export default {
         position absolute
         width 100%
         text-align center
-        bottom 20px
         color #FF6154
         font-size 18px
+        &.code
+          bottom 20px
+        &.hx_code
+          bottom 45px
         em
           font-style normal
           color $color-gray-5

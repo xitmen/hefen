@@ -172,7 +172,8 @@ export const sendVerificationCode = (params) => {
 
 // 注册
 export const register = (params) => {
-  const url = `${HOST_NAME}api/common/register`
+  // const url = `http://boxfen.sf-epiaotong.cn/box-fans/api/common/register`
+  const url = 'http://boxfen.sf-epiaotong.cn/box/api/common/register'
   return new Promise((resolve, reject) => {
     ax.post(url, qs.stringify(params))
       .then(function (response) {
