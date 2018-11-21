@@ -48,7 +48,7 @@ export default {
         this.uid = '2'
       }
     }
-    this.getUserImg()
+    // this.getUserImg()
   },
   methods: {
     getUserImg () {

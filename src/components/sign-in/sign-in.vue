@@ -38,7 +38,7 @@
           <li>
             <label>上级推荐码</label>
             <p>
-              <input type="text" v-model="upCode" :disabled="isDisabled" placeholder="请输入推荐码" />
+              <input type="text" v-model="upCode" maxlength="6" :disabled="isDisabled" placeholder="请输入推荐码" />
             </p>
           </li>
           <li>
@@ -157,6 +157,7 @@ export default {
                 _this.count = 0
                 clearInterval(_this.timer)
                 _this.isGetCode = true
+                _this.btnText = '获取验证码'
               } else {
                 _this.btnText = _this.maxTime - _this.count
               }
