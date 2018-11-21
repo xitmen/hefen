@@ -30,7 +30,7 @@ export const getCardInfo = (cardId) => {
 }
 
 export const sendCardAndUserInfo = (params) => {
-  const url = `${HOST_NAME}api/index/fillUserInfo`
+  const url = `http://boxfen.sf-epiaotong.cn/box-fans/api/index/fillUserInfo`
   return new Promise((resolve, reject) => {
     ax.post(url, qs.stringify(params))
       .then(function (response) {

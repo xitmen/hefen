@@ -107,6 +107,7 @@ export default {
     },
     nextStep () {
       let data = this.ajax
+      let _this = this
       if (data.name === '') {
         this.text = '请输入正确的用户名'
         this.$refs.tips.show()
@@ -121,7 +122,7 @@ export default {
       } else {
         sendCardAndUserInfo(data).then((data) => {
           if (data.code === String(SUCCESS)) {
-            location.href = this.cardInfo.apply_url
+            location.href = _this.cardInfo.url
           }
         })
       }

@@ -19,13 +19,13 @@
           <li>
             <label>密码</label>
             <p>
-              <input type="password" v-model="password" maxlength="11" placeholder="请输入密码" />
+              <input type="password" v-model="password" maxlength="20" placeholder="请输入密码" />
             </p>
           </li>
           <li>
             <label>确认密码</label>
             <p>
-              <input type="password" v-model="confirmPassword" maxlength="11" placeholder="请确认密码" />
+              <input type="password" v-model="confirmPassword" maxlength="20" placeholder="请确认密码" />
             </p>
           </li>
           <li>

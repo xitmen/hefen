@@ -56,7 +56,6 @@ export default {
       cardList: [],
       currentCard: 0,
       cardId: null,
-      applyUrl: '',
       cardListData: null
     }
   },
@@ -93,16 +92,15 @@ export default {
             return item.apply_url || Number(item.credit_card_cnt)
           })
           this.cardId = this.cardList[0].id
-          this.applyUrl = this.cardList[0].apply_url
+          // this.applyUrl = this.cardList[0].apply_url
         }
       })
     },
     applyCardHandler (item) {
-      if (this.applyUrl) {
+      if (item.url) {
         this.$router.push({
           path: `/card-list/${item.bank_id}`
         })
-        item.apply_url = this.applyUrl
         this.setCardInfo(item)
       } else {
         this.$refs.tips.show()
@@ -118,6 +116,7 @@ export default {
       this.cardListData = null
       getCardInfo(this.cardId).then((data) => {
         if (data.code === SUCCESS) {
+          debugger
           this.cardListData = data.data
         }
       })
@@ -174,7 +173,10 @@ export default {
           h3
             font-size (24/2)px
             color $color-gray-5
-            margin-bottom 8px
+            height 40px
+            line-height 20px
+            overflow hidden
+            text-overflow ellipsis
           h4 
             font-size (28/2)px
             line-height (34/2)px
