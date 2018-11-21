@@ -31,7 +31,7 @@
           <li>
             <label>验证码</label>
             <p>
-              <input type="text" v-model="phoneCode" placeholder="请输入验证码" />
+              <input type="text" v-model="phoneCode" maxlength="6" placeholder="请输入验证码" />
               <a href="javascript:;" @click="getPhoneCode">{{btnText}}</a>
             </p>
           </li>
