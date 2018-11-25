@@ -49,7 +49,7 @@ import LeftNav from 'base/left-nav/left-nav'
 import Loading from 'base/loading/loading'
 import Default from 'base/default/default'
 import Compute from 'base/compute/compute'
-import {getCardList, getCreditCardGoods} from 'base/api/api'
+import {getCardList, getCreditCardGoods, getMobileIntegralGoods, getTelecomIntegralGoods, getUnicomIntegralGoods} from 'base/api/api'
 import {SUCCESS} from 'base/api/config'
 import {mapMutations} from 'vuex'
 
@@ -58,9 +58,23 @@ export default {
   data () {
     return {
       isBack: false,
+      pointsList: [{
+        id: -1,
+        name: '移动积分',
+        code: -1
+      }, {
+        id: -2,
+        name: '联通积分',
+        code: -2
+      }, {
+        id: -3,
+        name: '电信积分',
+        code: -3
+      }],
       cardList: [],
       currentCard: 0,
       cardId: null,
+      currentItem: null,
       currentPoints: 0,
       keywords: '',
       goodsName: null,
@@ -73,6 +87,12 @@ export default {
   created () {
     this.getCardList()
     this.goAppHome = true
+    this.map = {
+      0: getMobileIntegralGoods,
+      1: getUnicomIntegralGoods,
+      2: getTelecomIntegralGoods
+    }
+    this.printsType = {0: '1', 1: '2', 2: '3'}
     this.mapKey = {
       '建设银行': 'js',
       '交通银行': 'jt',
@@ -100,9 +120,11 @@ export default {
     }
   },
   methods: {
-    selectCard (index, cardId) {
+    selectCard (index, item) {
+      this.currentItem = item
       this.currentCard = index
-      this.cardId = cardId
+      // debugger
+      this.cardId = item.id
       this.keywords = this.cardList[index].keywords
     },
     goGuide () {
@@ -123,7 +145,9 @@ export default {
           this.cardList = data.data.filter(item => {
             return Number(item.goods_cnt)
           })
+          this.cardList = this.pointsList.concat(this.cardList)
           this.cardId = this.cardList[0].id
+          this.currentItem = this.cardList[0]
           this.keywords = this.cardList[this.currentCard].keywords
         }
       })
@@ -144,6 +168,12 @@ export default {
       this.setPointsType('4')
       this.setGoodsName(item)
     },
+    getCardData () {
+      this.pointsData = []
+      this.map[this.currentCard]().then((data) => {
+        this.pointsData = data.data.goods_list
+      })
+    },
     ...mapMutations({
       setCardInfo: 'SET_CARD_INFO',
       setBankCode: 'SET_BANK_CODE',
@@ -153,11 +183,15 @@ export default {
     })
   },
   watch: {
-    cardId () {
+    currentItem (newCurrent) {
       this.pointsData = []
-      getCreditCardGoods(this.cardId).then((data) => {
-        this.pointsData = data.data.goods_list
-      })
+      if (newCurrent.code) {
+        this.getCardData()
+      } else {
+        getCreditCardGoods(this.cardId).then((data) => {
+          this.pointsData = data.data.goods_list
+        })
+      }
     },
     '$route' (to, from) {
       if (to.query.uid) {

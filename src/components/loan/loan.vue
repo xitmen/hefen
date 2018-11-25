@@ -12,11 +12,11 @@
                   <img :src="item.img" alt="car01">
                 </div>
                 <div class="text">
-                  <h2 class="title">{{item.name}}</h2>
-                  <h3 class="sub-title">{{item.intro}}</h3>
-                  <h4 class="sub-price" v-show="share">【&yen;{{item.card_money}}/张】</h4>
+                  <h2 class="title">{{item.productName}}</h2>
+                  <h3 class="sub-title">{{item.settlementPeriod}}/{{item.feedbackType}}</h3>
+                  <h4 class="sub-price" v-show="share">【&yen;{{item.amount}}/张】</h4>
                   <div class="desc">
-                    <span class="num">{{item.cnt}}</span>
+                    <span class="num">{{item.applications}}</span>
                     <span>人已申请</span>
                   </div>
                 </div>
@@ -44,15 +44,16 @@ import Scroll from 'base/scroll/scroll'
 import LeftNav from 'base/left-nav/left-nav'
 import Loading from 'base/loading/loading'
 import Default from 'base/default/default'
-import {getCardList, getCardInfo} from 'base/api/api'
+import {getLoanList} from 'base/api/api'
 import {SUCCESS} from 'base/api/config'
 import {mapMutations} from 'vuex'
 
 export default {
-  name: 'card-list',
+  name: 'loan',
   data () {
     return {
       isBack: false,
+      catachData: [],
       cardList: [],
       currentCard: 0,
       cardId: null,
@@ -63,13 +64,8 @@ export default {
     this.text = '该银行暂未开通。。。'
     this.getCardList()
     this.goAppHome = true
-    try{
-      let uid = window.box.getUidFromApp()
-      this.setUserUid(uid)
-    } catch (e){
-      if (this.$route.query.uid) {
-        this.setUserUid(this.$route.query.uid)
-      }
+    if (this.$route.query.uid) {
+      this.setUid(this.$route.query.uid)
     }
     if ('box' in window) {
       this.isBack = true
@@ -82,28 +78,31 @@ export default {
     setUserUid (uid) {
       this.setUid(uid)
     },
-    selectCard (index, item) {
+    selectCard (index) {
       this.currentCard = index
-      this.cardId = item.id
-      this.applyUrl = this.cardList[index].apply_url
+      this.cardListData = this.catachData[this.cardList[index].name]
     },
     getCardList () {
-      getCardList({type: 1}).then((data) => {
-        if (data.code === SUCCESS) {
-          data.data.sort((a, b) => {
-            return Number(a.sort) - Number(b.sort)
+      getLoanList().then((data) => {
+        if (data.code === String(SUCCESS)) {
+          let cardListData = {}
+          let _this = this
+          data.data.forEach(item => {
+            if (!(item.productType in cardListData)) {
+              cardListData[item.productType] = []
+              _this.cardList.push({name: item.productType})
+            }
+            cardListData[item.productType].push(item)
           })
-          this.cardList = data.data.filter(item => {
-            return item.apply_url || Number(item.credit_card_cnt)
-          })
-          this.cardId = this.cardList[0].id
+          _this.catachData = cardListData
+          _this.cardListData = cardListData[_this.cardList[0].name]
         }
       })
     },
     applyCardHandler (item) {
       if (item.url) {
         this.$router.push({
-          path: `/card-list/${item.bank_id}`
+          path: `/loan-list/${item.id}`
         })
         this.setCardInfo(item)
       } else {
@@ -116,14 +115,6 @@ export default {
     })
   },
   watch: {
-    cardId () {
-      this.cardListData = null
-      getCardInfo(this.cardId).then((data) => {
-        if (data.code === SUCCESS) {
-          this.cardListData = data.data
-        }
-      })
-    },
     '$route' (to, from) {
       if (to.query.uid) {
         this.setUid(this.$route.query.uid)
@@ -165,6 +156,8 @@ export default {
           flex 0 0 (249/2)px
           height (157/2)px
           margin-right (19/2)px
+          border-radius 5px
+          overflow hidden
           img
             width 100%
             height 100%
@@ -176,13 +169,10 @@ export default {
           h3
             font-size (24/2)px
             color $color-gray-5
-            height 40px
-            line-height 20px
-            overflow hidden
-            text-overflow ellipsis
+            line-height 22px
           h4 
             font-size (28/2)px
-            line-height (34/2)px
+            line-height 22px
             color $color-gray-5
           .desc
             font-size 12px

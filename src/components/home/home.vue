@@ -4,11 +4,11 @@
       <router-link tag="li" to="/card-list">
         <span>信用卡申请</span>
       </router-link>
-      <router-link tag="li" to="/points">
+      <router-link tag="li" to="/bankPoints">
         <span>积分兑换</span>
       </router-link>
-      <router-link tag="li" to="/bankPoints">
-        <span>银行积分</span>
+      <router-link tag="li" to="/loan-list">
+        <span>贷款超市</span>
       </router-link>
       <router-link tag="li" to="/visitingCard">
         <span>名片</span>

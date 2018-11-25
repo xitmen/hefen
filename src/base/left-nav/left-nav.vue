@@ -2,7 +2,7 @@
   <scroll class="nav-list-scroll">
     <div class="nav-list">
       <ul>
-        <li v-for="(item, index) in data" :class="{'active': index === currentCard}" :key="index" @click="selectCard(index, item.id)">{{item.name}}</li>
+        <li v-for="(item, index) in data" :class="{'active': index === currentCard}" :key="index" @click="selectCard(index, item)">{{item.name}}</li>
       </ul>
     </div>
   </scroll>

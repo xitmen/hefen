@@ -184,3 +184,31 @@ export const register = (params) => {
       })
   })
 }
+
+// 获取贷款列表
+export const getLoanList = (params) => {
+  const url = 'http://47.101.151.70:8080/box-test/api/index/getLoanList'
+  return new Promise((resolve, reject) => {
+    ax.post(url, qs.stringify(params))
+      .then(function (response) {
+        resolve(response.data)
+      })
+      .catch(function (error) {
+        reject(error)
+      })
+  })
+}
+
+// 申请贷款信息提交
+export const applyLoan = (params) => {
+  const url = `http://47.101.151.70:8080/box-test/api/index/applyLoan`
+  return new Promise((resolve, reject) => {
+    ax.post(url, qs.stringify(params))
+      .then(function (response) {
+        resolve(response.data)
+      })
+      .catch(function (error) {
+        reject(error)
+      })
+  })
+}

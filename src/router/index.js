@@ -81,6 +81,18 @@ const SignIn = (resolve) => {
   })
 }
 
+const Loan = (resolve) => {
+  import('components/loan/loan').then((module) => {
+    resolve(module)
+  })
+}
+
+const ApplyLoan = (resolve) => {
+  import('components/apply-loan/apply-loan').then((module) => {
+    resolve(module)
+  })
+}
+
 export default new Router({
   routes: [
     {
@@ -149,6 +161,18 @@ export default new Router({
       path: '/signIn',
       name: 'SignIn',
       component: SignIn
+    },
+    {
+      path: '/loan-list',
+      name: 'Loan',
+      component: Loan,
+      children: [
+        {
+          path: ':id',
+          name: 'ApplyLoan',
+          component: ApplyLoan
+        }
+      ]
     }
   ]
 })

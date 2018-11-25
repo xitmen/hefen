@@ -8,18 +8,18 @@
           <ul>
             <li>
               <span class="name"><i class="icon-name"></i></span>
-              <input type="text" v-model="ajax.name" placeholder="请填写申卡人姓名"/>
+              <input type="text" v-model="ajax.name" placeholder="请填写申请人姓名"/>
             </li>
             <li>
               <span class="name"><i class="icon-card-id"></i></span>
-              <input type="text" maxLength="18" v-model="ajax.id_card_no" placeholder="请填写申卡人身份证号码"/>
+              <input type="text" maxLength="18" v-model="ajax.idCardNo" placeholder="请填写申请人身份证号码"/>
             </li>
             <li>
               <span class="name"><i class="icon-mobile"></i></span>
-              <input type="tel" maxLength="11" v-model="ajax.phone" placeholder="请填写申卡人手机号码"/>
+              <input type="tel" maxLength="11" v-model="ajax.phone" placeholder="请填写申请人手机号码"/>
             </li>
           </ul>
-          <p class="tips">
+          <p class="tips" v-show="0">
             <span class="check" @click="selectedCheck">
               <i class="icon-check" :class="{'checked': isChecked}"></i>
             </span>
@@ -30,10 +30,6 @@
           <p class="next-step">
             <a href="javascript:;" class="btn" @click="nextStep">下一步</a>
           </p>
-          <div class="message">
-            <p><img src="./icon05.png" width="15px" />本服务由银联提供</p>
-            <p>信用卡申请不需要任何费用，谨防电话诈骗</p>
-          </div>
         </div>
       </div>
       <confirm text="请选同意协议" ref="confirm" @confirm="selectedCheck"></confirm>
@@ -47,17 +43,16 @@ import Tab from 'components/tab/tab'
 import Confirm from 'base/confirm/confirm'
 import {mapGetters} from 'vuex'
 import Tips from 'base/tips/tips'
-import {sendCardAndUserInfo} from 'base/api/api'
+import {applyLoan} from 'base/api/api'
 import {SUCCESS} from 'base/api/config'
 import IdValidator from 'id-validator'
 
 const idValidator = new IdValidator()
 
 export default {
-  name: 'apply-card',
+  name: 'apply-loan',
   data () {
     return {
-      isSubmit: true,
       share: false,
       isChecked: true,
       text: '',
@@ -66,9 +61,9 @@ export default {
       ajax: {
         uid: '',
         name: '',
-        id_card_no: '',
+        idCardNo: '',
         phone: '',
-        bank_card_id: ''
+        productId: ''
       }
     }
   },
@@ -79,31 +74,25 @@ export default {
     ])
   },
   created () {
-    this.getUid()
-    if (!this.cardInfo.bank_id) {
+    try {
+      this.ajax.uid = window.box.getUidFromApp()
+      this.isBack = true
+    } catch (e) {
+      if (this.uid) {
+        this.ajax.uid = this.uid
+      } else {
+        this.ajax.uid = '5'
+      }
+    }
+    if (!this.cardInfo.id) {
       this.$router.push({
-        path: '/card-list'
+        path: '/loan-list'
       })
     } else {
-      this.ajax.bank_card_id = this.cardInfo.bank_id
+      this.ajax.productId = this.cardInfo.id
     }
   },
-  mounted () {
-    this.getUid()
-  },
   methods: {
-    getUid () {
-      try {
-        this.ajax.uid = window.box.getUidFromApp()
-        this.isBack = true
-      } catch (e) {
-        if (this.uid) {
-          this.ajax.uid = this.uid
-        } else {
-          this.ajax.uid = '5'
-        }
-      }
-    },
     selectedCheck () {
       this.isChecked = !this.isChecked
     },
@@ -115,13 +104,11 @@ export default {
     nextStep () {
       let data = this.ajax
       let _this = this
-      if (!this.isSubmit) {
-        return 
-      }
+      debugger
       if (data.name === '') {
         this.text = '请输入正确的用户名'
         this.$refs.tips.show()
-      } else if (!idValidator.isValid(data.id_card_no)) {
+      } else if (!idValidator.isValid(data.idCardNo)) {
         this.text = '请输入正确的身份证号码'
         this.$refs.tips.show()
       } else if (data.phone === '' || data.phone.length < 11) {
@@ -130,13 +117,11 @@ export default {
       } else if (!this.isChecked) {
         this.$refs.confirm.show()
       } else {
-        this.isSubmit = false
-        sendCardAndUserInfo(data).then((data) => {
-          _this.isSubmit = true
+        applyLoan(data).then((data) => {
           if (data.code === String(SUCCESS)) {
             location.href = _this.cardInfo.url
           } else {
-            this.text = data.msg
+            this.text = data.message
             this.$refs.tips.show()
           }
         })
