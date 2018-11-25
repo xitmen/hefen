@@ -46,7 +46,7 @@ import Loading from 'base/loading/loading'
 import Default from 'base/default/default'
 import {getCardList, getCardInfo} from 'base/api/api'
 import {SUCCESS} from 'base/api/config'
-import {mapMutations} from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
 
 export default {
   name: 'card-list',
@@ -63,14 +63,7 @@ export default {
     this.text = '该银行暂未开通。。。'
     this.getCardList()
     this.goAppHome = true
-    try{
-      let uid = window.box.getUidFromApp()
-      this.setUserUid(uid)
-    } catch (e){
-      if (this.$route.query.uid) {
-        this.setUserUid(this.$route.query.uid)
-      }
-    }
+    this.getUid()
     if ('box' in window) {
       this.isBack = true
       this.share = true
@@ -78,9 +71,25 @@ export default {
       this.share = false
     }
   },
+  mounted () {
+    this.getUid()
+  },
   methods: {
+    getUid () {
+      try{
+        let uid = window.box.getUidFromApp()
+        this.setUserUid(uid)
+      } catch (e){
+        if (this.$route.query.uid) {
+          this.setUserUid(this.$route.query.uid)
+        }else if (window.localStorage.getItem('fhUid')) {
+          this.setUserUid(window.localStorage.getItem('fhUid'))
+        }
+      }
+    },
     setUserUid (uid) {
       this.setUid(uid)
+      window.localStorage.setItem('fhUid', uid)
     },
     selectCard (index, item) {
       this.currentCard = index

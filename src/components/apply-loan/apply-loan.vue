@@ -86,7 +86,7 @@ export default {
     }
     if (!this.cardInfo.id) {
       this.$router.push({
-        path: '/loan-list'
+        path: `/loan-list?uid=${this.id}`
       })
     } else {
       this.ajax.productId = this.cardInfo.id

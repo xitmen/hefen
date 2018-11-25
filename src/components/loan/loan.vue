@@ -64,9 +64,7 @@ export default {
     this.text = '该银行暂未开通。。。'
     this.getCardList()
     this.goAppHome = true
-    if (this.$route.query.uid) {
-      this.setUid(this.$route.query.uid)
-    }
+    this.getUid()
     if ('box' in window) {
       this.isBack = true
       this.share = true
@@ -74,9 +72,25 @@ export default {
       this.share = false
     }
   },
+  mounted () {
+    this.getUid()
+  },
   methods: {
+    getUid () {
+      try{
+        let uid = window.box.getUidFromApp()
+        this.setUserUid(uid)
+      } catch (e){
+        if (this.$route.query.uid) {
+          this.setUserUid(this.$route.query.uid)
+        } else if (window.localStorage.getItem('fhUid')) {
+          this.setUserUid(window.localStorage.getItem('fhUid'))
+        }
+      }
+    },
     setUserUid (uid) {
       this.setUid(uid)
+      window.localStorage.setItem('fhUid', uid)
     },
     selectCard (index) {
       this.currentCard = index

@@ -5,7 +5,13 @@
         <span>信用卡申请</span>
       </router-link>
       <router-link tag="li" to="/bankPoints">
+        <span>银行卡兑换</span>
+      </router-link>
+      <router-link tag="li" to="/points">
         <span>积分兑换</span>
+      </router-link>
+       <router-link tag="li" to="/bank-and-points">
+        <span>银行卡和积分</span>
       </router-link>
       <router-link tag="li" to="/loan-list">
         <span>贷款超市</span>

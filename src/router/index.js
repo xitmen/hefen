@@ -33,6 +33,12 @@ const BankPoints = (resolve) => {
   })
 }
 
+const BankAndPoints = (resolve) => {
+  import('components/bank-and-points/bank-and-points').then((module) => {
+    resolve(module)
+  })
+}
+
 const Agreement = (resolve) => {
   import('components/agreement/agreement').then((module) => {
     resolve(module)
@@ -121,6 +127,11 @@ export default new Router({
       path: '/bankPoints',
       name: 'BankPoints',
       component: BankPoints
+    },
+    {
+      path: '/bank-and-points',
+      name: 'BankAndPoints',
+      component: BankAndPoints
     },
     {
       path: '/agreement',

@@ -82,7 +82,7 @@ export default {
     this.getUid()
     if (!this.cardInfo.bank_id) {
       this.$router.push({
-        path: '/card-list'
+        path: `/card-list?uid=${this.uid}`
       })
     } else {
       this.ajax.bank_card_id = this.cardInfo.bank_id

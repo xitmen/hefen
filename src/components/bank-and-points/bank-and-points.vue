@@ -54,10 +54,23 @@ import {SUCCESS} from 'base/api/config'
 import {mapMutations} from 'vuex'
 
 export default {
-  name: 'bank-points',
+  name: 'bank-and-points',
   data () {
     return {
       isBack: false,
+      pointsList: [{
+        id: -1,
+        name: '移动积分',
+        code: -1
+      }, {
+        id: -2,
+        name: '联通积分',
+        code: -2
+      }, {
+        id: -3,
+        name: '电信积分',
+        code: -3
+      }],
       cardList: [],
       currentCard: 0,
       cardId: null,
@@ -74,6 +87,12 @@ export default {
   created () {
     this.getCardList()
     this.goAppHome = true
+    this.map = {
+      0: getMobileIntegralGoods,
+      1: getUnicomIntegralGoods,
+      2: getTelecomIntegralGoods
+    }
+    this.printsType = {0: '1', 1: '2', 2: '3'}
     this.mapKey = {
       '建设银行': 'js',
       '交通银行': 'jt',
@@ -126,7 +145,7 @@ export default {
           this.cardList = data.data.filter(item => {
             return Number(item.goods_cnt)
           })
-          // this.cardList = this.pointsList.concat(this.cardList)
+          this.cardList = this.pointsList.concat(this.cardList)
           this.cardId = this.cardList[0].id
           this.currentItem = this.cardList[0]
           this.keywords = this.cardList[this.currentCard].keywords
