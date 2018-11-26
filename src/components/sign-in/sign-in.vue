@@ -36,9 +36,9 @@
             </p>
           </li>
           <li>
-            <label>上级推荐码</label>
+            <label>上级盒伙人推荐码</label>
             <p>
-              <input type="text" v-model="upCode" maxlength="6" :disabled="isDisabled" placeholder="请输入推荐码" />
+              <input type="text" v-model="upCode" maxlength="6" :disabled="isDisabled" placeholder="请输入上级盒伙人推荐码" />
             </p>
           </li>
           <li>

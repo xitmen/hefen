@@ -49,7 +49,7 @@ import LeftNav from 'base/left-nav/left-nav'
 import Loading from 'base/loading/loading'
 import Default from 'base/default/default'
 import Compute from 'base/compute/compute'
-import {getCardList, getCreditCardGoods, getMobileIntegralGoods, getTelecomIntegralGoods, getUnicomIntegralGoods} from 'base/api/api'
+import {getCardList, getCreditCardGoods} from 'base/api/api'
 import {SUCCESS} from 'base/api/config'
 import {mapMutations} from 'vuex'
 

@@ -46,7 +46,7 @@ import Loading from 'base/loading/loading'
 import Default from 'base/default/default'
 import {getCardList, getCardInfo} from 'base/api/api'
 import {SUCCESS} from 'base/api/config'
-import {mapMutations, mapGetters} from 'vuex'
+import {mapMutations} from 'vuex'
 
 export default {
   name: 'card-list',
@@ -76,13 +76,13 @@ export default {
   },
   methods: {
     getUid () {
-      try{
+      try {
         let uid = window.box.getUidFromApp()
         this.setUserUid(uid)
-      } catch (e){
+      } catch (e) {
         if (this.$route.query.uid) {
           this.setUserUid(this.$route.query.uid)
-        }else if (window.localStorage.getItem('fhUid')) {
+        } else if (window.localStorage.getItem('fhUid')) {
           this.setUserUid(window.localStorage.getItem('fhUid'))
         }
       }

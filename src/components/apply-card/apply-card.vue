@@ -4,7 +4,7 @@
       <tab title="信用卡申请" :share="share"></tab>
       <div class="apply-card-content">
         <div class="apply-card-info">
-          <h1>请您完善个人信息</h1>
+          <h1>请填写办卡人申请信息</h1>
           <ul>
             <li>
               <span class="name"><i class="icon-name"></i></span>
