@@ -74,16 +74,7 @@ export default {
     ])
   },
   created () {
-    try {
-      this.ajax.uid = window.box.getUidFromApp()
-      this.isBack = true
-    } catch (e) {
-      if (this.uid) {
-        this.ajax.uid = this.uid
-      } else {
-        this.ajax.uid = '5'
-      }
-    }
+    this.getUid()
     if (!this.cardInfo.id) {
       this.$router.push({
         path: `/loan-list?uid=${this.id}`
@@ -92,7 +83,22 @@ export default {
       this.ajax.productId = this.cardInfo.id
     }
   },
+  mounted () {
+    this.getUid()
+  },
   methods: {
+    getUid () {
+      try {
+        this.ajax.uid = window.box.getUidFromApp()
+        this.isBack = true
+      } catch (e) {
+        if (this.uid) {
+          this.ajax.uid = this.uid
+        } else {
+          this.ajax.uid = '5'
+        }
+      }
+    },
     selectedCheck () {
       this.isChecked = !this.isChecked
     },
