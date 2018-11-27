@@ -18,6 +18,7 @@
 
 <script>
 import Tab from 'components/tab/tab'
+import QRCode from '../../../static/lib/qrcode.min'
 import {getCusinessCard} from 'base/api/api'
 import {SUCCESS, SIGN_IN} from 'base/api/config'
 

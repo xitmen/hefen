@@ -104,7 +104,6 @@ export default {
     nextStep () {
       let data = this.ajax
       let _this = this
-      debugger
       if (data.name === '') {
         this.text = '请输入正确的用户名'
         this.$refs.tips.show()

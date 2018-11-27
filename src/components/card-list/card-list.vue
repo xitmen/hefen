@@ -189,7 +189,7 @@ export default {
             line-height 20px
             overflow hidden
             text-overflow ellipsis
-          h4 
+          h4
             font-size (28/2)px
             line-height (34/2)px
             color $color-gray-5

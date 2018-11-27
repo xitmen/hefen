@@ -83,7 +83,6 @@ export default {
       if (this.isApp) {
         this.$refs.tab.shareHandler(true, true)
       } else {
-        // this.$refs.tab.download()
         this.$router.push({
           path: `/signIn?upCode=${this.code}`
         })

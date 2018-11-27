@@ -77,10 +77,10 @@ export default {
   },
   methods: {
     getUid () {
-      try{
+      try {
         let uid = window.box.getUidFromApp()
         this.setUserUid(uid)
-      } catch (e){
+      } catch (e) {
         if (this.$route.query.uid) {
           this.setUserUid(this.$route.query.uid)
         } else if (window.localStorage.getItem('fhUid')) {
@@ -184,7 +184,7 @@ export default {
             font-size (24/2)px
             color $color-gray-5
             line-height 22px
-          h4 
+          h4
             font-size (28/2)px
             line-height 22px
             color $color-gray-5

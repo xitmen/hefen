@@ -4,7 +4,7 @@
       <tab title="信用卡申请" :share="share"></tab>
       <div class="apply-card-content">
         <div class="apply-card-info">
-          <h1>请填写办卡人申请信息</h1>
+          <h1>请填写办卡人信息</h1>
           <ul>
             <li>
               <span class="name"><i class="icon-name"></i></span>
@@ -116,7 +116,7 @@ export default {
       let data = this.ajax
       let _this = this
       if (!this.isSubmit) {
-        return 
+        return
       }
       if (data.name === '') {
         this.text = '请输入正确的用户名'

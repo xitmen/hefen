@@ -28,7 +28,7 @@ const shareMsg = {
 
 const defaultShareMsg = {
   title: '快快加入盒粉之家!',
-  subTitle: '盒粉之家' 
+  subTitle: '盒粉之家'
 }
 
 export default {
