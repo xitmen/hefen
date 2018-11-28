@@ -212,3 +212,18 @@ export const applyLoan = (params) => {
       })
   })
 }
+
+// 添加点击量
+
+export const addClicks = (params) => {
+  const url = `http://47.101.151.70:8080/box-fans/api/index/addClicks`
+  return new Promise((resolve, reject) => {
+    ax.post(url, qs.stringify(params))
+      .then(function (response) {
+        resolve(response.data)
+      })
+      .catch(function (error) {
+        reject(error)
+      })
+  })
+} 

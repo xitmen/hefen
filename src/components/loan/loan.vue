@@ -44,7 +44,7 @@ import Scroll from 'base/scroll/scroll'
 import LeftNav from 'base/left-nav/left-nav'
 import Loading from 'base/loading/loading'
 import Default from 'base/default/default'
-import {getLoanList} from 'base/api/api'
+import {getLoanList, addClicks} from 'base/api/api'
 import {SUCCESS} from 'base/api/config'
 import {mapMutations} from 'vuex'
 
@@ -119,6 +119,8 @@ export default {
           path: `/loan-list/${item.id}`
         })
         this.setCardInfo(item)
+        // 点击点击量
+        addClicks({productId: item.id})
       } else {
         this.$refs.tips.show()
       }
