@@ -173,7 +173,7 @@ export const sendVerificationCode = (params) => {
 // 注册
 export const register = (params) => {
   // const url = `http://boxfen.sf-epiaotong.cn/box-fans/api/common/register`
-  const url = 'http://boxfen.sf-epiaotong.cn/box-fans/api/common/register'
+  const url = 'http://boxfen.sf-epiaotong.cn/box-fans/common/newRegister'
   return new Promise((resolve, reject) => {
     ax.post(url, qs.stringify(params))
       .then(function (response) {

@@ -7,7 +7,7 @@
           <div id="qrcode"></div>
           <img src="/static/img/logo.jpg" />
         </div>
-        <span class=code v-show="code"><em>盒粉推荐码:</em>{{code}}</span>
+        <span class=code v-show="false"><em>盒粉推荐码:</em>{{code}}</span>
         <span class="hx_code" v-show="hx_code"><em>环迅推荐码:</em>{{hx_code}}</span>
       </div>
       <p class="share-btn">
