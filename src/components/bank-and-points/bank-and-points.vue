@@ -158,14 +158,15 @@ export default {
       let price = Number(item.price)
       this.proportion = this.minPoints / price
       this.id = item.id
+      this.setPointsType(item.type)
+      this.setGoodsName(item)
       this.$refs.compute.show()
-      this.setPointsType('4')
     },
     exchangeHandler (item) {
       this.$router.push({
         path: '/exchange'
       })
-      this.setPointsType('4')
+      this.setPointsType(item.type)
       this.setGoodsName(item)
     },
     getCardData () {
