@@ -124,7 +124,7 @@ export default {
       } else {
         applyLoan(data).then((data) => {
           if (data.code === String(SUCCESS)) {
-            location.href = _this.cardInfo.url.replace(/&amp;/g,'&')
+            location.href = _this.cardInfo.url.replace(/&amp;/g, '&')
           } else {
             this.text = data.message
             this.$refs.tips.show()

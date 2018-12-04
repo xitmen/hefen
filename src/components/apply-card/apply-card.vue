@@ -134,7 +134,7 @@ export default {
         sendCardAndUserInfo(data).then((data) => {
           _this.isSubmit = true
           if (data.code === String(SUCCESS)) {
-            location.href = _this.cardInfo.url.replace(/&amp;/g,'&')
+            location.href = _this.cardInfo.url.replace(/&amp;/g, '&')
           } else {
             this.text = data.msg
             this.$refs.tips.show()
