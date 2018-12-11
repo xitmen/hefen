@@ -19,6 +19,8 @@
                     <span class="num">{{item.applications}}</span>
                     <span>人已申请</span>
                   </div>
+                  <h3>{{item.interestRate}}</h3>
+                  <h3>{{item.remarks}}</h3>
                 </div>
               </li>
             </ul>
@@ -170,7 +172,7 @@ export default {
         padding 12px
         .header-img
           flex 0 0 (249/2)px
-          height (157/2)px
+          height (180/2)px
           margin-right (19/2)px
           border-radius 5px
           overflow hidden
@@ -193,6 +195,7 @@ export default {
           .desc
             font-size 12px
             color $color-gray-5
+            margin-bottom 5px
             .num
               color $color-red
       .default-wrapper
