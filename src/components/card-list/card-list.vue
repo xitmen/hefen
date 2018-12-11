@@ -14,7 +14,7 @@
                 <div class="text">
                   <h2 class="title">{{item.name}}</h2>
                   <h3 class="sub-title">{{item.intro}}</h3>
-                  <h4 class="sub-price" v-show="share">【&yen;{{item.card_money}}/张】</h4>
+                  <!-- <h4 class="sub-price" v-show="share">【&yen;{{item.card_money}}/张】</h4> -->
                   <div class="desc">
                     <span class="num">{{item.cnt}}</span>
                     <span>人已申请</span>
