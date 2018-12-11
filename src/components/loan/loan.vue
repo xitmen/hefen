@@ -15,12 +15,12 @@
                   <h2 class="title">{{item.productName}}</h2>
                   <h3 class="sub-title">{{item.settlementPeriod}}/{{item.feedbackType}}</h3>
                   <!-- <h4 class="sub-price" v-show="share">【&yen;{{item.amount}}/张】</h4> -->
+                  <h3>{{item.interestRate}}</h3>
+                  <h3>{{item.remarks}}</h3>
                   <div class="desc">
                     <span class="num">{{item.applications}}</span>
                     <span>人已申请</span>
                   </div>
-                  <h3>{{item.interestRate}}</h3>
-                  <h3>{{item.remarks}}</h3>
                 </div>
               </li>
             </ul>
@@ -195,7 +195,6 @@ export default {
           .desc
             font-size 12px
             color $color-gray-5
-            margin-bottom 5px
             .num
               color $color-red
       .default-wrapper
